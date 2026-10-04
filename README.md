@@ -79,21 +79,27 @@ Milestone payments, grants, delivery confirmation and warranty claims are
 verification, authorization model and tests. Supra/Pyth adapters are also not
 implemented; `IPriceSource` is the extension point.
 
-## Suggested demo journey
+## The routes
 
-1. **Home and How it works:** the one-sentence pitch, then the full lifecycle,
-   an FAQ, and the guarantees with their tests.
-2. **Feeds:** inspect live readings and configured freshness limits. Each
-   parallel RPC read has a 15-second deadline, including its response body.
-   Healthy feeds remain visible if others fail. A total outage shows the
-   configuration and retry option. Retries fetch fresh data.
-3. **Evidence:** opens on topic `0.0.10752744`, the recorded testnet lifecycle. Reads
-   share a 15-second budget across pagination and the empty-topic check. A
-   timeout reports failure rather than presenting the partial read as complete.
-4. **Policies:** connect a funded testnet wallet to create and fund a policy,
-   then submit settlement or expiry/refund transactions. These spend testnet
-   HBAR; opening the page does not send a transaction.
-5. **Debug Contracts / Block Explorer:** inspect deployed state, and follow links to HashScan.
+`/` and `/how-it-works` cover the lifecycle, an FAQ, and the guarantees with
+the tests that hold them.
+
+`/feeds` reads all seven Chainlink feeds live and shows each age against the
+limit configured for that feed. The reads run in parallel under one 15-second
+deadline that includes response bodies, so healthy feeds still render when
+others fail, and a total outage falls back to the configured table with a
+retry that fetches fresh data.
+
+`/evidence` reads any public topic from the mirror node, opening on
+`0.0.10752744`. Pagination and the empty-topic check share a single 15-second
+budget, and a timeout is reported as a failure rather than shown as a complete
+trail.
+
+`/policies` is the only route that needs a wallet: create and fund a policy,
+then submit settlement, expiry or refund. Opening the page sends nothing.
+
+`/debug` and `/blockexplorer` are the scaffold's contract inspector and links
+out to HashScan.
 
 Settlement checks the observation available **when the transaction executes**.
 It does not prove that a price crossed the threshold earlier. Neither a price
@@ -291,18 +297,16 @@ testnet credentials and spend HBAR. They are not needed for read-only review.
 [NOTES-failures.md](NOTES-failures.md) contains historical debugging notes;
 apply machine-specific workarounds only after reproducing their symptoms.
 
-## External template and submission
+## Use this as a template
 
-Talon is a Scaffold-HBAR template: with the repository public, a new project
-can be scaffolded from it with:
+Talon is a Scaffold-HBAR template. Scaffold a new project from it with:
 
 ```sh
 npm create scaffold-hbar@latest -- --template da-b0s/talon
 ```
 
-Verify the scaffold output and repeat install, lint, build and route checks
-from that fresh copy before submission. The manifest is
-[template.json](template.json).
+Verify the scaffold output and repeat the install, lint, build and route
+checks from that fresh copy. The manifest is [template.json](template.json).
 
 Harness configuration is in [.harness](.harness/). From a clean repository clone,
 run its configured checks with:
@@ -321,9 +325,6 @@ them. Use a clean checkout without private environment files for the gate.
 Do not delete credentials or weaken the validator to obtain a pass.
 A `routes=0` result needs its detailed error inspected; it does not by itself
 identify a code defect or machine problem.
-
-See the [official bounty brief](https://hedera.com/blog/scaffold-hbar-template-bounty/)
-for submission requirements. Publication remains the owner's decision.
 
 ## Licence and credits
 
