@@ -20,6 +20,19 @@ point, not a production financial product.
 
 ## Quick start
 
+Try the [public testnet demo](https://talon-inky.vercel.app), or create your own
+project from a terminal in the parent directory:
+
+```sh
+npm create scaffold-hbar@latest -- talon-demo --template da-b0s/talon
+cd talon-demo
+```
+
+The scaffolder checks for a working `yarn` command before creating a project.
+If that check fails, configure Yarn/Corepack first, or clone the repository and
+use its bundled Yarn directly. See [VALIDATION.md](VALIDATION.md) for the tested
+versions and Windows-specific setup issues.
+
 Use Node **20.18.3 or later**, Git, and an internet connection for installation
 and live testnet reads. Yarn 3.2.3 is included; no global Yarn installation is
 required. Run these commands from the extracted or cloned repository root:
@@ -104,9 +117,10 @@ reading is suitable for a payout. An observed age spread is not a security proof
 
 This implementation requires a nonzero limit for each registered asset.
 Choose it using provider guidance, observations and application risk tolerance.
-The shipped limits are examples, not certified safe values. The live tests
-contain assumptions about feed ages and can fail when those conditions change,
-even if the contract's configured checks still work.
+The shipped limits are examples, not certified safe values. Live tests check
+availability, decimals, positive prices and round validity. They report ages
+without requiring a particular spread or claiming that every feed stays fresh.
+Network failures can fail those checks independently of offline contract tests.
 
 ## Architecture and trust assumptions
 
@@ -257,17 +271,11 @@ node .yarn/releases/yarn-3.2.3.cjs hardhat:test:ci
 node .yarn/releases/yarn-3.2.3.cjs next:build
 ```
 
-Keep `HEDERA_FORKING` unset for offline contract tests. Recent local checks
-recorded 174 core-library tests passing. The contract suite has
-83 passing tests, covering rejected deposits, unchanged escrow balances,
-deadline boundaries and valid top-up recovery. Contract lint also passes.
-The separate `hardhat:check-types` command now passes after adding generated
-contract and event types to the evidence and demo scripts. Run `hardhat:compile`
-first on a fresh checkout to generate those types. The transaction-producing
-scripts have not been rerun on testnet as part of that typing fix. Frontend type
-checking, the production build and targeted navigation/form/retry browser
-checks also passed. This is not a fresh public scaffold or a security review;
-the full harness has not been rerun on the current edits.
+Keep `HEDERA_FORKING` unset for offline contract tests. Run `hardhat:compile`
+before contract type checking to generate types on a fresh checkout.
+[VALIDATION.md](VALIDATION.md) records the tested source, clean-scaffold results,
+test counts, browser/Harness status and remaining limitations. Successful tests
+are not a security audit or proof that a wallet transaction will succeed.
 
 Optional live measurement (network-dependent, no wallet transaction):
 
@@ -275,12 +283,12 @@ Optional live measurement (network-dependent, no wallet transaction):
 node .yarn/releases/yarn-3.2.3.cjs next:test:live
 ```
 
-[EVIDENCE.md](EVIDENCE.md) records deployment addresses and successful/rejected
-transactions from 21 September 2026. The
-[recorded settlement](https://hashscan.io/testnet/transaction/0x2e00806f0ea3b3ed72f45df64bae1e51b44f5de80c6105f18906fca71adcc968)
-was independently checked as successful during this local review. Other records
-and historical verification claims are not a new validation of every linked
-transaction or later source edit.
+[EVIDENCE.md](EVIDENCE.md) starts with the current 28 September deployment and
+keeps older deployments below it as history. Its
+[recorded settlement](https://hashscan.io/testnet/transaction/0x3d3397ddfe128d84d749be71916db810011fa9c6124fc2ed404ecd3b3540c0ab)
+was rechecked through the mirror node on 4 October: `SUCCESS`. The current HCS
+topic contained three records. This does not validate every historical link,
+prove an HSS execution, or establish that the public wallet UI was tested.
 
 `lifecycle` and `failures` reproduce transaction scenarios with configured
 testnet credentials and spend HBAR. They are not needed for read-only review.

@@ -199,7 +199,7 @@ the same day:
 | --- | --- | --- |
 | spread between freshest and stalest | 116× | 228× |
 | DAI/USD age | 23.1 hours | 27 minutes |
-| feed a 1-hour global bound would wrongly reject | USDC, USDT, DAI | BTC/USD |
+| feeds whose observed age exceeded a 1-hour limit | USDC, USDT, DAI | BTC/USD |
 
 These are historical measurements. Being within a heartbeat does not establish
 fitness for an application's payout, and rejecting such a reading is not

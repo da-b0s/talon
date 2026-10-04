@@ -11,11 +11,11 @@ import { PolicyRegistry } from "./PolicyRegistry.sol";
 ///
 /// @dev WHY THIS CONTRACT HOLDS NOTHING
 ///
-///      Settlement decides; PolicyRegistry pays. The escrow never sits here,
-///      so a mistake in trigger validation cannot drain it directly — the
-///      worst it can do is ask the registry for a transition the registry
-///      will refuse. Two contracts, two different ways to be wrong, and both
-///      have to be wrong at once for money to move incorrectly.
+///      Settlement validates the price condition; PolicyRegistry holds escrow
+///      and enforces authorization, lifecycle and payout limits. The registry
+///      trusts this authorized contract to validate the condition. Incorrect
+///      settlement logic can therefore cause an incorrect payout even when
+///      the registry's own checks pass.
 ///
 ///      The price source is swappable (IPriceSource). This contract never
 ///      mentions Chainlink, which is what makes the template reusable rather
