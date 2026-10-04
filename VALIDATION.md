@@ -74,6 +74,25 @@ The Solidity edit in this review changes documentation comments only; deployed
 Sourcify verification refers to the original deployed source, not a rebuilt
 artifact containing the new comment metadata. No redeployment was needed.
 
+### Change made after that Harness run — 4 October 2026
+
+`CLAUDE.md` was deleted and two files edited after the validated run above, so
+the recorded `passed=true` result refers to the earlier commit, not to `HEAD`.
+The delta is documentation and validator configuration only; no application
+code, contract, wallet configuration or deployed artifact changed.
+
+| Changed | Why |
+| --- | --- |
+| `CLAUDE.md` deleted | Removed a vendor-specific agent file; `AGENTS.md` is the single source of truth and is the file the bounty requires. |
+| `AGENTS.md` header | Reworded to address coding agents generally rather than naming one tool. |
+| `.harness/validators/static.json` | Dropped `CLAUDE.md` from `fileAssertions.required`; leaving it would have failed the gate against the deleted file. |
+| `README.md` opening | Removed a duplicated sentence pair describing settlement and refund. |
+
+Re-verified after the change: lint clean, 174 library tests, 83 contract tests
+and the production build all pass, and the static validator's file assertions
+match the tree. The full Harness workspace run was not repeated for this
+documentation delta.
+
 ## Public testnet evidence
 
 - Settlement contract: `0xa95601CA138C2a673C4314E6beFf56bb3832257C`.

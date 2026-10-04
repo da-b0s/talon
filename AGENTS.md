@@ -1,7 +1,7 @@
 # Agent instructions
 
-Briefing for coding agents in this repository (Claude Code, Cursor, Codex).
-Claude Code loads it through `CLAUDE.md`.
+Briefing for coding agents working in this repository. Read it before
+changing anything: it records the constraints the code depends on.
 
 ## Project overview
 

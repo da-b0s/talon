@@ -1,22 +1,18 @@
 # Talon
 
-**Holds until it's true.** Lock HBAR behind a price condition. Anyone can
-submit settlement when the latest accepted price meets the target. After the
-deadline, an unsettled policy can be expired and its creator can request a
-refund. Neither action happens automatically.
+**Holds until it's true.** A creator defines a beneficiary, payout, price
+threshold and deadline, then funds the policy. Anyone can submit settlement
+once the latest accepted Chainlink reading meets the condition. After the
+deadline, anyone can expire an unsettled policy and its creator can request a
+refund. Neither action happens automatically: each needs a transaction.
 
 Talon is a [Scaffold-HBAR](https://github.com/hashgraph/scaffold-hbar)
 template, built as an entry to the
 [Scaffold-HBAR template bounty](https://hedera.com/blog/scaffold-hbar-template-bounty/),
-for **price-triggered HBAR escrow on Hedera testnet**.
-A creator defines a beneficiary, payout, price threshold and deadline, then
-funds the policy. Anyone can submit a settlement transaction when the latest
-accepted oracle reading meets the condition. After expiry, anyone can mark the
-policy expired, and its creator can request a refund.
-
-The template combines Chainlink price reads, a settlement state machine and
-an optional HCS evidence publisher. It is an unaudited developer starting
-point, not a production financial product.
+for **price-triggered HBAR escrow on Hedera testnet**. It combines Chainlink
+price reads, a settlement state machine and an optional HCS evidence
+publisher. It is an unaudited developer starting point, not a production
+financial product.
 
 ## Quick start
 
