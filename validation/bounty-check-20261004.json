@@ -1,0 +1,129 @@
+{
+  "reviewDate": "2026-10-04",
+  "sourceCommit": "43848c1cecb6ccfed62bb3f7336112c76a60be14",
+  "node": "24.12.0",
+  "yarn": "3.2.3",
+  "scaffolder": "0.4.1",
+  "harness": "1.2.2",
+  "manifestRestoredForSourceGate": true,
+  "passed": true,
+  "findings": [],
+  "commands": [
+    {
+      "command": "node .yarn/releases/yarn-3.2.3.cjs install",
+      "exitCode": 0,
+      "durationMs": 3754
+    },
+    {
+      "command": "node .yarn/releases/yarn-3.2.3.cjs lint",
+      "exitCode": 0,
+      "durationMs": 21573
+    },
+    {
+      "command": "node .yarn/releases/yarn-3.2.3.cjs next:test",
+      "exitCode": 0,
+      "durationMs": 9121
+    },
+    {
+      "command": "node .yarn/releases/yarn-3.2.3.cjs hardhat:test:ci",
+      "exitCode": 0,
+      "durationMs": 20048
+    },
+    {
+      "command": "node .yarn/releases/yarn-3.2.3.cjs next:build",
+      "exitCode": 0,
+      "durationMs": 110274
+    }
+  ],
+  "browser": {
+    "passed": true,
+    "configPath": "C:\\Users\\DELL\\Documents\\Code\\talon-final-scaffold-20261004\\.harness\\validators\\playwright-smoke.yaml",
+    "serverUrl": "http://localhost:3000",
+    "serverCommand": "echo Local: http://localhost:3000 && node .yarn/releases/yarn-3.2.3.cjs next:serve",
+    "routes": [
+      {
+        "name": "home",
+        "path": "/",
+        "statusCode": 200,
+        "rendered": true,
+        "consoleErrors": [],
+        "forbiddenTextFound": [],
+        "durationMs": 837
+      },
+      {
+        "name": "how-it-works",
+        "path": "/how-it-works",
+        "statusCode": 200,
+        "rendered": true,
+        "consoleErrors": [],
+        "forbiddenTextFound": [],
+        "durationMs": 299
+      },
+      {
+        "name": "feeds",
+        "path": "/feeds",
+        "statusCode": 200,
+        "rendered": true,
+        "consoleErrors": [],
+        "forbiddenTextFound": [],
+        "durationMs": 1317
+      },
+      {
+        "name": "evidence-project",
+        "path": "/evidence",
+        "statusCode": 200,
+        "rendered": true,
+        "consoleErrors": [],
+        "forbiddenTextFound": [],
+        "durationMs": 716
+      },
+      {
+        "name": "evidence-foreign-topic",
+        "path": "/evidence?topic=0.0.4318417",
+        "statusCode": 200,
+        "rendered": true,
+        "consoleErrors": [],
+        "forbiddenTextFound": [],
+        "durationMs": 2165
+      },
+      {
+        "name": "evidence-missing-topic",
+        "path": "/evidence?topic=0.0.999999999",
+        "statusCode": 200,
+        "rendered": true,
+        "consoleErrors": [],
+        "forbiddenTextFound": [],
+        "durationMs": 689
+      },
+      {
+        "name": "policies",
+        "path": "/policies",
+        "statusCode": 200,
+        "rendered": true,
+        "consoleErrors": [],
+        "forbiddenTextFound": [],
+        "durationMs": 217
+      },
+      {
+        "name": "debug-contracts",
+        "path": "/debug",
+        "statusCode": 200,
+        "rendered": true,
+        "consoleErrors": [],
+        "forbiddenTextFound": [],
+        "durationMs": 274
+      },
+      {
+        "name": "block-explorer",
+        "path": "/blockexplorer",
+        "statusCode": 200,
+        "rendered": true,
+        "consoleErrors": [],
+        "forbiddenTextFound": [],
+        "durationMs": 205
+      }
+    ],
+    "durationMs": 21283
+  },
+  "walletTransactionsTested": false
+}

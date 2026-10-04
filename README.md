@@ -308,11 +308,17 @@ Verify the scaffold output and repeat install, lint, build and route checks
 from that fresh copy before submission. The manifest is
 [template.json](template.json).
 
-Harness configuration is in [.harness](.harness/). Run its configured checks with:
+Harness configuration is in [.harness](.harness/). From a clean repository clone,
+run its configured checks with:
 
 ```sh
 node .yarn/releases/yarn-3.2.3.cjs exec hedera-harness validate
 ```
+
+The scaffolder consumes and removes `template.json` in generated projects.
+The Harness includes a source-repository manifest check, so use a repository
+clone for that check, or restore the unchanged manifest from the exact source
+revision being validated and record that step. Do not remove the assertion.
 
 The static validator rejects certain local `.env` files even when Git ignores
 them. Use a clean checkout without private environment files for the gate.
